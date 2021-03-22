@@ -1,0 +1,45 @@
+AACQ,Artius Acquisition Inc. Class A Common Stock,$13.20,0.42,3.286%,1195425000.00,United States,2020,5642978,Finance,Business Services
+AACQU,Artius Acquisition Inc. Unit ,$14.46,0.55,3.954%,0.00,United States,2020,521727,Finance,Business Services
+AACQW,Artius Acquisition Inc Warrant,$3.87,0.31,8.708%,0.00,United States,2020,1439795,Finance,Business Services
+AAIC,Arlington Asset Investment Corp Class A (new),$3.99,0.05,1.269%,133376471.00,United States,,203735,Consumer Services,Real Estate Investment Trusts
+AAMC,Altisource Asset Management Corp Com,$24.60,-0.3595,-1.44%,40595215.00,United States,,15183,Finance,Real Estate
+AAME,Atlantic American Corporation Common Stock,$4.64,-0.60,-11.45%,94722255.00,United States,,306586,Finance,Life Insurance
+AAN,Aarons Holdings Company Inc. Common Stock ,$21.17,0.69,3.369%,715091036.00,United States,2020,295867,Technology,Diversified Commercial Services
+AAOI,Applied Optoelectronics Inc. Common Stock,$12.30,0.36,3.015%,282607826.00,United States,2013,572479,Technology,Semiconductors
+AAON,AAON Inc. Common Stock,$77.00,1.51,2.00%,4022641315.00,United States,,195281,Capital Goods,Industrial Machinery/Components
+AAT,American Assets Trust Inc. Common Stock,$29.30,0.04,0.137%,1771873257.00,United States,2011,327893,Consumer Services,Real Estate Investment Trusts
+AAWW,Atlas Air Worldwide Holdings NEW Common Stock,$62.23,5.19,9.099%,1712401392.00,United States,,1393944,Transportation,Transportation Services
+AB,AllianceBernstein Holding L.P.  Units,$37.05,-0.84,-2.217%,3639160001.00,United States,,487706,Finance,Investment Managers
+ABCB,Ameris Bancorp Common Stock,$47.53,1.21,2.612%,3305306592.00,United States,1994,206408,Finance,Major Banks
+ABEO,Abeona Therapeutics Inc. Common Stock,$2.41,-0.05,-2.033%,237451812.00,United States,,3516038,Health Care,Major Pharmaceuticals
+ABG,Asbury Automotive Group Inc Common Stock,$160.90,3.90,2.484%,3103044673.00,United States,2002,87975,Consumer Durables,Automotive Aftermarket
+ABIO,ARCA biopharma Inc. Common Stock,$4.75,0.09,1.931%,44276983.00,United States,,2361218,Health Care,Biotechnology: In Vitro & In Vivo Diagnostic Substances
+ABM,ABM Industries Incorporated Common Stock,$42.58,0.36,0.853%,2856201295.00,United States,,203880,Finance,Diversified Commercial Services
+ABR,Arbor Realty Trust Common Stock,$16.17,0.80,5.205%,1995298589.00,United States,2004,1577184,Consumer Services,Real Estate Investment Trusts
+ABTX,Allegiance Bancshares Inc. Common Stock,$37.11,1.02,2.826%,758807096.00,United States,2015,44011,Finance,Major Banks
+AC,Associated Capital Group Inc. Common Stock,$36.44,1.22,3.464%,812799520.00,United States,2015,14499,Finance,Investment Bankers/Brokers/Service
+ACAC,Acies Acquisition Corp. Class A Ordinary Share,$10.71,-0.07,-0.649%,288165938.00,United States,2020,525304,Finance,Business Services
+ACACU,Acies Acquisition Corp. Unit,$11.63,-0.01,-0.086%,0.00,United States,2020,3277,Finance,Business Services
+ACACW,Acies Acquisition Corp. Warrant,$2.88,0.08,2.857%,0.00,United States,2020,49316,Finance,Business Services
+ACAD,ACADIA Pharmaceuticals Inc. Common Stock,$51.73,1.31,2.598%,8223936441.00,United States,1985,528359,Health Care,Major Pharmaceuticals
+ACBI,Atlantic Capital Bancshares Inc. Common Stock,$19.29,0.35,1.848%,393417852.00,United States,,61849,Finance,Major Banks
+ACC,American Campus Communities Inc Common Stock,$42.81,0.37,0.872%,5892029816.00,United States,2004,1015022,Consumer Services,Real Estate Investment Trusts
+ACCO,Acco Brands Corporation Common Stock,$8.32,0.09,1.094%,786213684.00,United States,,972985,Consumer Durables,Publishing
+ACEL,Accel Entertainment Inc. ,$10.58,0.13,1.244%,1023962775.00,United States,2017,179395,Consumer Services,Services-Misc. Amusement & Recreation
+ACER,Acer Therapeutics Inc. Common Stock (DE),$3.58,0.08,2.286%,51230674.00,United States,,104119,Health Care,Major Pharmaceuticals
+ACET,Adicet Bio Inc. Common Stock ,$16.12,0.32,2.025%,315788027.00,United States,2018,93452,Health Care,Major Pharmaceuticals
+ACEV,ACE Convergence Acquisition Corp. Class A Ordinary Shares,$12.15,-0.43,-3.418%,349312500.00,United States,2020,825021,Technology,Semiconductors
+ACEVU,ACE Convergence Acquisition Corp. Unit,$13.89,-0.18,-1.279%,0.00,United States,2020,12471,Technology,Semiconductors
+ACEVW,ACE Convergence Acquisition Corp. Warrant,$3.19,0.06,1.917%,0.00,United States,2020,352686,Technology,Semiconductors
+ACHC,Acadia Healthcare Company Inc. Common Stock,$51.81,1.16,2.29%,4610636766.00,United States,,876689,Health Care,Medical Specialities
+ACHV,Achieve Life Sciences Inc. Common Shares,$14.12,0.53,3.90%,85993116.00,United States,,79740,Health Care,Biotechnology: In Vitro & In Vivo Diagnostic Substances
+ACI,Albertsons Companies Inc. Class A Common Stock,$16.59,0.19,1.159%,7723196750.00,United States,2020,1457666,Consumer Services,Food Chains
+ACIA,Acacia Communications Inc. Common Stock,$114.98,0.15,0.131%,4899116132.00,United States,2016,291667,Technology,Semiconductors
+ACIC,Atlas Crest Investment Corp. Class A Common Stock,$16.28,-0.86,-5.018%,1017500000.00,United States,2020,9098047,Finance,Business Services
+ACIW,ACI Worldwide Inc. Common Stock,$42.43,-0.22,-0.516%,4954191760.00,United States,,482177,Technology,Computer Software: Prepackaged Software
+ACKIT,Ackrell SPAC Partners I Co. Subunits,$10.20,0.03,0.295%,0.00,United States,2021,70429,Finance,Business Services
+ACKIU,Ackrell SPAC Partners I Co. Units,$10.77,0.02,0.186%,0.00,United States,2020,9672,Finance,Business Services
+ACKIW,Ackrell SPAC Partners I Co. Warrants,$1.248,0.018,1.463%,0.00,United States,2021,145842,Finance,Business Services
+ACLS,Axcelis Technologies Inc. Common Stock,$39.75,1.32,3.435%,1336911750.00,United States,2000,335501,Technology,Industrial Machinery/Components
+ACM,AECOM Common Stock,$57.16,1.14,2.035%,8446791392.00,United States,2007,724886,Consumer Services,Military/Government/Technical
+AMC
