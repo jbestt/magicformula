@@ -3,8 +3,8 @@ from dateutil.relativedelta import relativedelta
 
 class MagicFormula:
 
-    def __init__(self, ticker, last_open):
-        self.debug = True
+    def __init__(self, ticker, debug_level, last_open):
+        self.debug = debug_level
 
         self.ticker = ticker
         self.roic = None
@@ -22,8 +22,11 @@ class MagicFormula:
         self.cap_category = None
 
         self._last_trade_date = last_open
-        self._yq = Ticker(ticker)
 
+        ### These next three lines are the time consuming part. Once we have this info, we can derive the rest of the
+        ### info (except for the change in price over time).
+
+        self._yq = Ticker(ticker)
         self._all_financial_data = self._yq.all_financial_data()
         self._valuation_measures = self._yq.valuation_measures
 
@@ -31,73 +34,73 @@ class MagicFormula:
             last_EV = self._valuation_measures[self._valuation_measures['periodType'] == '3M'].tail(1)
             self.ev = float(last_EV.EnterpriseValue)
         except:
-            self.debug_writer("WARNING: Failed to get enterprise value for ")
+            self.debug_writer(2, "WARNING: Failed to get enterprise value for ")
 
         try: # market cap
             last_market_cap = self._valuation_measures[self._valuation_measures['periodType'] == '3M'].tail(1)
             self.market_cap = float(last_market_cap.MarketCap)
         except:
-            self.debug_writer("WARNING: Failed to get market cap for ")
+            self.debug_writer(2, "WARNING: Failed to get market cap for ")
 
         try: # working cap
             self.working_cap = self._all_financial_data.WorkingCapital[-1]
         except:
-            self.debug_writer("WARNING: Failed to get working capital for ")
+            self.debug_writer(2, "WARNING: Failed to get working capital for ")
 
         try: # net plant, property, and equipment
             self.net_PPE = self._all_financial_data.NetPPE[-1]
         except:
-            self.debug_writer("WARNING: Failed to failed to get net PPE for ")
+            self.debug_writer(2, "WARNING: Failed to failed to get net PPE for ")
 
         try: # expenses before interest and taxes
             self.ebit = self._all_financial_data.EBIT[-1]
         except:
-            self.debug_writer("WARNING: Failed to get EBIT for ")
+            self.debug_writer(2, "WARNING: Failed to get EBIT for ")
 
         try: # ticker price from last year
             date_12m = self._last_trade_date - relativedelta(years=1)
             history = self._yq.history("1d", "1d", date_12m, date_12m + relativedelta(days=1))
             self.price_12m = float(history.close)
         except:
-            self.debug_writer("WARNING: Failed to get last year's price for ")
+            self.debug_writer(2, "WARNING: Failed to get last year's price for ")
 
         try: # ticker price from 6m ago
             date_6m = self._last_trade_date - relativedelta(days=182)
             history = self._yq.history("1d", "1d", date_6m, date_6m + relativedelta(days=1))
             self.price_6m = float(history.close)
         except:
-            self.debug_writer("WARNING: Failed to get price from 6m ago for ")
+            self.debug_writer(2, "WARNING: Failed to get price from 6m ago for ")
 
         try: # last closing price
             history = self._yq.history("1d", "1d", self._last_trade_date).tail(1)
             self.price_now = float(history.close)
         except:
-            self.debug_writer("WARNING: Failed to get last trading day price for ")
+            self.debug_writer(2, "WARNING: Failed to get last trading day price for ")
 
         ### Run calculations
         # ROIC (Return on invested capital) = EBIT / (net working capital + net PPE)
         if self.ebit and self.working_cap and self.net_PPE:
             self.roic = self.ebit / (self.working_cap + self.net_PPE)
         else:
-            self.debug_writer("WARNING: Could not calculate return on invested capital for ")
+            self.debug_writer(2, "WARNING: Could not calculate return on invested capital for ")
 
         # Earnings yield = EBIT / Enterprise value
         if self.ebit and self.ev:
             self.ey = self.ebit / self.ev
         else:
-            self.debug_writer("WARNING: Could not calculate enterprise yield for ")
+            self.debug_writer(2, "WARNING: Could not calculate enterprise yield for ")
 
         # 12m change in price
         if self.price_now and self.price_12m and self.price_12m != 0:
             self.change_12m = ((self.price_now - self.price_12m) / self.price_12m)
         else:
-            self.debug_writer("WARNING: Could not calculate change in previous 12m price for ")
+            self.debug_writer(2, "WARNING: Could not calculate change in previous 12m price for ")
 
         # 6m change in price
         if self.price_now and self.price_6m and self.price_6m != 0:
             self.change_6m = ((self.price_now - self.price_6m) / self.price_6m)
         else:
-            self.debug_writer("WARNING: Could not calculate change in previous 6m price for ")
+            self.debug_writer(2, "WARNING: Could not calculate change in previous 6m price for ")
 
         ### Categorize market cap for easy excel grouping
         if self.market_cap:
@@ -112,10 +115,10 @@ class MagicFormula:
                 self.cap_category = "large"
             if self.market_cap >= 200000000000:
                 self.cap_category = "mega"
-        self.debug_writer("INFO: Got to the end for ")
+        self.debug_writer(3, "INFO: Finished getting info for ")
 
-    def debug_writer(self, message):
-        if self.debug:
+    def debug_writer(self, message_debug_level, message):
+        if self.debug >= message_debug_level:
             print(message, self.ticker)
 
     def __str__(self):
