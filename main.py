@@ -11,7 +11,6 @@
 #
 # For entertainment purposes only.
 
-import csv
 from MagicFormula import MagicFormula
 from datetime import datetime, time
 import pandas_market_calendars as mcal
@@ -19,22 +18,22 @@ from dateutil.relativedelta import relativedelta
 from Writer import Writer
 import concurrent.futures
 
-def get_last_trading_day():
+
+def get_last_trading_day() -> datetime:
     nyse = mcal.get_calendar('NYSE')
     early = nyse.schedule(start_date=datetime.now() - relativedelta(days=5), end_date=datetime.now())
     lastday = mcal.date_range(early, frequency='1D')[-1]
     return lastday.date()
 
-def ticker_wrapper(ticker, debug_level, last_open, resultswriter):
-    magic_object = MagicFormula(ticker, debug_level, last_open)
+
+def ticker_wrapper(ticker: str, last_open: datetime, resultswriter: Writer, debug_level=0):
+    magic_object = MagicFormula(ticker, last_open, debug_level)
     try:
         print(magic_object.__str__())
         resultswriter.write_row(magic_object.__str__())
     except:
         magic_object.debug_writer(0, "*** CRITICAL FAILURE: Failure on ticker ")
 
-
-last_open = get_last_trading_day()
 
 sourcefile = 'stocks.txt'
 destfile = 'stonk_data.csv'
@@ -48,30 +47,32 @@ threads = 10
 debug_level = 2
 
 header = [
-        'date',
-        'ticker',
-        'return_on_invested_capital',
-        'enterprise_yield',
-        'price_12m_ago',
-        'price_6m_ago',
-        'last_price',
-        '12m_percent_change',
-        '6m_percent_change',
-        'marketCap',
-        'marketCap_category',
-        'ebit',
-        'working_capital',
-        'netPPE',
-        'enterprise_value'
-    ]
+    'date',
+    'ticker',
+    'return_on_invested_capital',
+    'enterprise_yield',
+    'price_12m_ago',
+    'price_6m_ago',
+    'last_price',
+    '12m_percent_change',
+    '6m_percent_change',
+    'marketCap',
+    'marketCap_category',
+    'ebit',
+    'working_capital',
+    'netPPE',
+    'enterprise_value'
+]
 
-# will take a csv of tickers, reading the first column as the ticker names
+last_open = get_last_trading_day()
+
+# Will take a csv of tickers, reading the first column as the ticker names.
 with open(sourcefile, 'r') as f:
     tickers = [row.split(",")[0] for row in f]
 
 writer = Writer(destfile, header)
 
-# now with threads! thanks wedgie
+# Now with threads! Thanks wedgie.
 with concurrent.futures.ThreadPoolExecutor(max_workers=threads) as executor:
     for i in tickers:
-        executor.submit(ticker_wrapper, i.strip(), debug_level, last_open, writer)
+        executor.submit(ticker_wrapper, i.strip(), last_open, writer, debug_level)

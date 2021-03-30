@@ -1,9 +1,10 @@
 from yahooquery import Ticker
 from dateutil.relativedelta import relativedelta
 
+
 class MagicFormula:
 
-    def __init__(self, ticker, debug_level, last_open):
+    def __init__(self, ticker, last_open, debug_level=0):
         self.debug = debug_level
 
         self.ticker = ticker
@@ -30,48 +31,48 @@ class MagicFormula:
         self._all_financial_data = self._yq.all_financial_data()
         self._valuation_measures = self._yq.valuation_measures
 
-        try: # enterprise value
-            last_EV = self._valuation_measures[self._valuation_measures['periodType'] == '3M'].tail(1)
-            self.ev = float(last_EV.EnterpriseValue)
+        try:  # enterprise value
+            last_ev = self._valuation_measures[self._valuation_measures['periodType'] == '3M'].tail(1)
+            self.ev = float(last_ev.EnterpriseValue)
         except:
             self.debug_writer(2, "WARNING: Failed to get enterprise value for ")
 
-        try: # market cap
+        try:  # market cap
             last_market_cap = self._valuation_measures[self._valuation_measures['periodType'] == '3M'].tail(1)
             self.market_cap = float(last_market_cap.MarketCap)
         except:
             self.debug_writer(2, "WARNING: Failed to get market cap for ")
 
-        try: # working cap
+        try:  # working cap
             self.working_cap = self._all_financial_data.WorkingCapital[-1]
         except:
             self.debug_writer(2, "WARNING: Failed to get working capital for ")
 
-        try: # net plant, property, and equipment
+        try:  # net plant, property, and equipment
             self.net_PPE = self._all_financial_data.NetPPE[-1]
         except:
             self.debug_writer(2, "WARNING: Failed to failed to get net PPE for ")
 
-        try: # expenses before interest and taxes
+        try:  # expenses before interest and taxes
             self.ebit = self._all_financial_data.EBIT[-1]
         except:
             self.debug_writer(2, "WARNING: Failed to get EBIT for ")
 
-        try: # ticker price from last year
+        try:  # ticker price from last year
             date_12m = self._last_trade_date - relativedelta(years=1)
             history = self._yq.history("1d", "1d", date_12m, date_12m + relativedelta(days=1))
             self.price_12m = float(history.close)
         except:
             self.debug_writer(2, "WARNING: Failed to get last year's price for ")
 
-        try: # ticker price from 6m ago
+        try:  # ticker price from 6m ago
             date_6m = self._last_trade_date - relativedelta(days=182)
             history = self._yq.history("1d", "1d", date_6m, date_6m + relativedelta(days=1))
             self.price_6m = float(history.close)
         except:
             self.debug_writer(2, "WARNING: Failed to get price from 6m ago for ")
 
-        try: # last closing price
+        try:  # last closing price
             history = self._yq.history("1d", "1d", self._last_trade_date).tail(1)
             self.price_now = float(history.close)
         except:
@@ -139,7 +140,6 @@ class MagicFormula:
             str(self.net_PPE),
             str(self.ev)
         ]
-
 
     def __repr__(self):
         return [
