@@ -1,13 +1,13 @@
-from yahooquery import Ticker
+from yahooquery import Ticker as Tickler
 from dateutil.relativedelta import relativedelta
 
 
 class MagicFormula:
 
-    def __init__(self, ticker, last_open, debug_level=0):
+    def __init__(self, tickler, last_open, debug_level=0):
         self.debug = debug_level
 
-        self.ticker = ticker
+        self.tickler = tickler
         self.roic = None
         self.ebit = None
         self.working_cap = None
@@ -27,7 +27,7 @@ class MagicFormula:
         ### These next three lines are the time consuming part. Once we have this info, we can derive the rest of the
         ### info (except for the change in price over time).
 
-        self._yq = Ticker(ticker)
+        self._yq = Tickler(tickler)
         self._all_financial_data = self._yq.all_financial_data()
         self._valuation_measures = self._yq.valuation_measures
 
@@ -58,14 +58,14 @@ class MagicFormula:
         except:
             self.debug_writer(2, "WARNING: Failed to get EBIT for ")
 
-        try:  # ticker price from last year
+        try:  # tickler price from last year
             date_12m = self._last_trade_date - relativedelta(years=1)
             history = self._yq.history("1d", "1d", date_12m, date_12m + relativedelta(days=1))
             self.price_12m = float(history.close)
         except:
             self.debug_writer(2, "WARNING: Failed to get last year's price for ")
 
-        try:  # ticker price from 6m ago
+        try:  # tickler price from 6m ago
             date_6m = self._last_trade_date - relativedelta(days=182)
             history = self._yq.history("1d", "1d", date_6m, date_6m + relativedelta(days=1))
             self.price_6m = float(history.close)
@@ -120,12 +120,12 @@ class MagicFormula:
 
     def debug_writer(self, message_debug_level, message):
         if self.debug >= message_debug_level:
-            print(message, self.ticker)
+            print(message, self.tickler)
 
     def __str__(self):
         return [
             str(self._last_trade_date),
-            str(self.ticker),
+            str(self.tickler),
             str(self.roic),
             str(self.ey),
             str(self.price_12m),
@@ -144,7 +144,7 @@ class MagicFormula:
     def __repr__(self):
         return [
             self._last_trade_date,
-            self.ticker,
+            self.tickler,
             self.roic,
             self.ey,
             self.price_12m,

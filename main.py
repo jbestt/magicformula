@@ -26,13 +26,13 @@ def get_last_trading_day() -> datetime:
     return lastday.date()
 
 
-def ticker_wrapper(ticker: str, last_open: datetime, resultswriter: Writer, debug_level=0):
-    magic_object = MagicFormula(ticker, last_open, debug_level)
+def tickler_wrapper(tickler: str, last_open: datetime, resultswriter: Writer, debug_level=0):
+    magic_object = MagicFormula(tickler, last_open, debug_level)
     try:
         print(magic_object.__str__())
         resultswriter.write_row(magic_object.__str__())
     except:
-        magic_object.debug_writer(0, "*** CRITICAL FAILURE: Failure on ticker ")
+        magic_object.debug_writer(0, "*** CRITICAL FAILURE: Failure on tickler ")
 
 
 sourcefile = 'stocks.txt'
@@ -48,7 +48,7 @@ debug_level = 2
 
 header = [
     'date',
-    'ticker',
+    'tickler',
     'return_on_invested_capital',
     'enterprise_yield',
     'price_12m_ago',
@@ -66,13 +66,13 @@ header = [
 
 last_open = get_last_trading_day()
 
-# Will take a csv of tickers, reading the first column as the ticker names.
+# Will take a csv of ticklers, reading the first column as the tickler names.
 with open(sourcefile, 'r') as f:
-    tickers = [row.split(",")[0] for row in f]
+    ticklers = [row.split(",")[0] for row in f]
 
 writer = Writer(destfile, header)
 
 # Now with threads! Thanks wedgie.
 with concurrent.futures.ThreadPoolExecutor(max_workers=threads) as executor:
-    for i in tickers:
-        executor.submit(ticker_wrapper, i.strip(), last_open, writer, debug_level)
+    for i in ticklers:
+        executor.submit(tickler_wrapper, i.strip(), last_open, writer, debug_level)
